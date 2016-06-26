@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{OmniAuth OAuth2 strategy for Xiaomi}
   spec.description   = %q{OmniAuth OAuth2 strategy for Xiaomi}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = "https://github.com/eugenmamaev/omniauth-xiaomi.git"
   spec.license       = "MIT"
 
   spec.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
