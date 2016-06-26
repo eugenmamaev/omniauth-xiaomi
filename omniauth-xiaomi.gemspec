@@ -13,9 +13,9 @@ Gem::Specification.new do |spec|
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files`.split($\)
-  spec.executables   = spec.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  spec.files         = `git ls-files`.split("\n")
+  spec.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency 'omniauth-oauth2', '~> 1.4'
