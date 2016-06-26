@@ -13,8 +13,6 @@ module OmniAuth
 
       # The HTTP response body
       def body
-        puts "My response body"
-        puts response.body
         unless response.body.index('&&&START&&&').nil?
           response.body.gsub!(/&&&START&&&/, '')
           @token_request = MultiJson.load(response.body)
@@ -30,7 +28,6 @@ module OmniAuth
         connection.response :logger, ::Logger.new($stdout) if ENV['OAUTH_DEBUG'] == 'true'
 
         url = connection.build_url(url, opts[:params]).to_s
-        puts url
         response = connection.run_request(verb, url, opts[:body], opts[:headers]) do |req|
           yield(req) if block_given?
         end
@@ -70,8 +67,6 @@ module OmniAuth
         else
           opts[:params] = params
         end
-        puts params.inspect
-        puts token_url
         response = request(options[:token_method], token_url, opts)
         error = Error.new(response)
         fail(error) if options[:raise_errors] && !(response.parsed.is_a?(Hash) && response.parsed['access_token'])
@@ -123,9 +118,7 @@ module OmniAuth
       end
 
       def raw_info
-        puts "Rawinfo"
         time = Time.now 
-        puts access_token.params.inspect
         data_request_url = "/user/info/getData"
         data_request_url << "?appid=#{ENV['XIAOMI_OAUTH_KEY']}"
         data_request_url << "&third_appid=#{ENV['XIAOMI_THIRD_APPID']}"
