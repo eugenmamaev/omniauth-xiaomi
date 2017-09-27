@@ -27,6 +27,7 @@ module OmniAuth
       def request(verb, url, opts = {}) # rubocop:disable CyclomaticComplexity, MethodLength, Metrics/AbcSize
         connection.response :logger, ::Logger.new($stdout) if ENV['OAUTH_DEBUG'] == 'true'
 
+        opts[:params] = opts[:params].merge({:client_id => id}) if opts[:params]
         url = connection.build_url(url, opts[:params]).to_s
         response = connection.run_request(verb, url, opts[:body], opts[:headers]) do |req|
           yield(req) if block_given?
